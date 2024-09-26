@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/coral/fluidsynth2"
+	"github.com/retropaint/fluidsynth2-plus"
 )
 
 func main() {
@@ -14,13 +14,19 @@ func main() {
 		fmt.Print(driver + " ")
 	}
 	// Easy way to set audio backend
-	//s.SetString("audio.driver", "coreaudio")
+	//s.SetString("audio.driver", "portaudio")
 
 	synth := fluidsynth2.NewSynth(s)
-	synth.SFLoad("files/soundfont.sf2", false)
+
+	synth.SFLoad("Roland_SC-88.sf2", true) // https://musical-artifacts.com/artifacts/538
+
+	// Extra synth options
+	// (Reverb and chorus disabled)
+	synth.SetReverb(0, 0)
+	synth.SetChorus(0, 0)
 
 	player := fluidsynth2.NewPlayer(synth)
-	player.Add("files/song.mid")
+	player.Add("sample.mid")
 
 	// Example of how to play from memory
 	// dat, err := ioutil.ReadFile("midifile.mid")
