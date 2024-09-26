@@ -102,3 +102,11 @@ func (s *Synth) ActivateKeyTuning(id TuningId, name string, tuning [128]float64,
 func (s *Synth) ActivateTuning(channel uint8, id TuningId, apply bool) {
 	C.fluid_synth_activate_tuning(s.ptr, C.int(channel), C.int(id.Bank), C.int(id.Program), cbool(apply))
 }
+
+func (s *Synth) SetReverb(room int, level float64) {
+	C.fluid_synth_set_reverb_group_level(s.ptr, C.int(room), C.double(level))
+}
+
+func (s *Synth) SetChorus(room int, level float64) {
+	C.fluid_synth_set_chorus_group_level(s.ptr, C.int(room), C.double(level))
+}
